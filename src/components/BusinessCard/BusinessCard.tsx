@@ -30,8 +30,7 @@ export default function BusinessCard({ info }: BusinessCardProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 relative"
-         style={{ background: info.theme.background }}>
+    <div className="min-h-screen w-full flex items-center justify-center p-4 relative">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
