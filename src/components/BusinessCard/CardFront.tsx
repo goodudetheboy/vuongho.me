@@ -10,17 +10,17 @@ interface CardFrontProps {
 export default function CardFront({ info }: CardFrontProps) {
   return (
     <div 
-      className="w-full h-full rounded-3xl p-0 flex overflow-hidden transform md:transform-none rotate-90 md:rotate-0"
+      className="w-full h-full rounded-3xl p-0 flex md:flex-row flex-col overflow-hidden"
       style={{ background: info.theme.cardBackground }}
     >
       <motion.div
-        className="relative w-1/3 h-full"
+        className="relative md:w-1/3 w-full md:h-full h-1/2"
       >
         <Image
           src={info.profileImage}
           alt={`${info.name.first} ${info.name.last}`}
           fill
-          className="object-cover rounded-l-3xl"
+          className="object-cover md:rounded-l-3xl md:rounded-tr-none rounded-t-3xl"
           priority
         />
       </motion.div>
@@ -32,13 +32,13 @@ export default function CardFront({ info }: CardFrontProps) {
           className="flex flex-col"
         >
           <h1 className={clsx(
-            "text-[4rem] md:text-[6rem] leading-[0.85] font-bold mb-2",
+            "text-[3rem] md:text-[6rem] leading-[0.85] font-bold mb-2",
             "bg-gradient-to-r from-white to-white/80",
             "bg-clip-text text-transparent"
           )}
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            {info.name.first}<br/>{info.name.last}
+            {info.name.first} {info.name.last}
           </h1>
 
           <div className="flex flex-col mt-4">

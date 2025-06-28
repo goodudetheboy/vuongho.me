@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PersonalInfo } from '@/types/personal-info';
 import { MdFlip } from 'react-icons/md';
@@ -14,16 +14,6 @@ interface BusinessCardProps {
 
 export default function BusinessCard({ info }: BusinessCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -35,7 +25,7 @@ export default function BusinessCard({ info }: BusinessCardProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-2xl aspect-[1.618/1] md:aspect-[1.618/1]"
+        className="w-full max-w-2xl aspect-[3/5] md:aspect-[1.618/1]"
       >
         <div className={`${styles.card} ${isFlipped ? styles.flipped : ''}`}>
           <div className={styles.cardInner}>
@@ -57,11 +47,7 @@ export default function BusinessCard({ info }: BusinessCardProps) {
                    flex items-center justify-center text-white/80 hover:text-white 
                    hover:bg-white/20 transition-colors shadow-lg z-10"
         style={{ 
-          transform: isFlipped 
-            ? isMobile 
-              ? 'rotateX(180deg)' 
-              : 'rotateY(180deg)' 
-            : 'rotate(0deg)',
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotate(0deg)',
           transition: 'transform 0.8s'
         }}
       >

@@ -14,16 +14,8 @@
   transform-style: preserve-3d;
 }
 
-@media (min-width: 768px) {
-  .card.flipped .cardInner {
-    transform: rotateY(180deg);
-  }
-}
-
-@media (max-width: 767px) {
-  .card.flipped .cardInner {
-    transform: rotateX(180deg);
-  }
+.card.flipped .cardInner {
+  transform: rotateY(180deg);
 }
 
 .cardFace {
@@ -38,14 +30,6 @@
   transform: rotateY(0deg);
 }
 
-@media (min-width: 768px) {
-  .cardBack {
-    transform: rotateY(180deg);
-  }
-}
-
-@media (max-width: 767px) {
-  .cardBack {
-    transform: rotateX(180deg);
-  }
+.cardBack {
+  transform: rotateY(180deg);
 } 

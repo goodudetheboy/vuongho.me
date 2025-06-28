@@ -31,6 +31,7 @@ export default function CardBack({ info }: CardBackProps) {
   const [expandedExpIndex, setExpandedExpIndex] = useState<number | null>(null);
   const [expandedEduIndex, setExpandedEduIndex] = useState<number | null>(null);
   const [expScrollState, setExpScrollState] = useState({ canScrollLeft: false, canScrollRight: false });
+  const [eduScrollState, setEduScrollState] = useState({ canScrollLeft: false, canScrollRight: false });
   const expScrollRef = useRef<HTMLDivElement>(null);
   const eduScrollRef = useRef<HTMLDivElement>(null);
 
@@ -54,6 +55,7 @@ export default function CardBack({ info }: CardBackProps) {
 
   useEffect(() => {
     const expElement = expScrollRef.current;
+    const eduElement = eduScrollRef.current;
 
     if (expElement) {
       checkScrollable(expElement, setExpScrollState);
@@ -61,13 +63,22 @@ export default function CardBack({ info }: CardBackProps) {
       expObserver.observe(expElement);
       return () => expObserver.disconnect();
     }
+
+    if (eduElement) {
+      checkScrollable(eduElement, setEduScrollState);
+      const eduObserver = new ResizeObserver(() => checkScrollable(eduElement, setEduScrollState));
+      eduObserver.observe(eduElement);
+      return () => eduObserver.disconnect();
+    }
   }, []);
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     if (!e.currentTarget) return;
     e.preventDefault();
     e.currentTarget.scrollLeft += e.deltaY;
-    checkScrollable(e.currentTarget, e.currentTarget === expScrollRef.current ? setExpScrollState : setExpScrollState);
+    checkScrollable(e.currentTarget, 
+      e.currentTarget === expScrollRef.current ? setExpScrollState : setEduScrollState
+    );
   };
 
   const LeftIndicator = ({ show }: { show: boolean }) => (
@@ -106,18 +117,23 @@ export default function CardBack({ info }: CardBackProps) {
 
   return (
     <div 
-      className="w-full h-full rounded-3xl p-8 transform md:transform-none rotate-90 md:rotate-0 relative overflow-hidden"
+      className="w-full h-full rounded-3xl p-8 relative overflow-hidden"
       style={{ background: info.theme.cardBackground }}
     >
-      <div className="h-full flex flex-col gap-8">
+      <div className="h-full flex flex-col gap-6 md:gap-8">
         {/* Education Section */}
         <section>
-          <h2 className="text-white/80 text-lg mb-4">Education</h2>
+          <div className="flex items-center justify-between mb-4">
+            <LeftIndicator show={eduScrollState.canScrollLeft} />
+            <h2 className="text-white/80 text-lg">Education</h2>
+            <RightIndicator show={eduScrollState.canScrollRight} />
+          </div>
           <div className="relative">
             <div 
               ref={eduScrollRef}
               className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar"
               onWheel={handleWheel}
+              onScroll={() => checkScrollable(eduScrollRef.current, setEduScrollState)}
             >
               {info.education.map((edu, index) => {
                 const Icon = iconMap[edu.icon as keyof typeof iconMap];
@@ -258,8 +274,8 @@ export default function CardBack({ info }: CardBackProps) {
 
         {/* Connect Section */}
         <section>
-          <h2 className="text-white/80 text-lg mb-4">Connect</h2>
-          <div className="flex gap-4">
+          <h2 className="text-white/80 text-lg mb-4 text-center">Connect</h2>
+          <div className="flex gap-4 justify-center">
             {info.socialLinks.map((social, index) => {
               const Icon = iconMap[social.icon as keyof typeof iconMap];
               return (
