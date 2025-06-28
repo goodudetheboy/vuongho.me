@@ -117,8 +117,7 @@ export default function CardBack({ info }: CardBackProps) {
 
   return (
     <div 
-      className="w-full h-full rounded-3xl p-8 relative overflow-hidden"
-      style={{ background: info.theme.cardBackground }}
+      className="w-full h-full p-8 relative bg-[#111111]/95"
     >
       <div className="h-full flex flex-col gap-6 md:gap-8">
         {/* Education Section */}

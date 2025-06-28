@@ -10,8 +10,7 @@ interface CardFrontProps {
 export default function CardFront({ info }: CardFrontProps) {
   return (
     <div 
-      className="w-full h-full rounded-3xl p-0 flex md:flex-row flex-col overflow-hidden"
-      style={{ background: info.theme.cardBackground }}
+      className="w-full h-full p-0 flex md:flex-row flex-col relative"
     >
       <motion.div
         className="relative md:w-1/3 w-full md:h-full h-1/2"
@@ -25,7 +24,7 @@ export default function CardFront({ info }: CardFrontProps) {
         />
       </motion.div>
 
-      <div className="flex-1 p-8 flex flex-col justify-center">
+      <div className="flex-1 p-8 flex flex-col justify-center bg-[#111111]/95">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

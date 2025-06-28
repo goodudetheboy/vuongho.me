@@ -24,6 +24,24 @@
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.cardFace::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #0a0a0a;
+  background-image: 
+    radial-gradient(circle at 100% 150%, #0a0a0a 24%, #333333 25%, #333333 28%, #0a0a0a 29%, #0a0a0a 36%, #333333 36%, #333333 40%, transparent 40%, transparent),
+    radial-gradient(circle at 0 150%, #0a0a0a 24%, #333333 25%, #333333 28%, #0a0a0a 29%, #0a0a0a 36%, #333333 36%, #333333 40%, transparent 40%, transparent),
+    radial-gradient(circle at 50% 100%, #333333 10%, #0a0a0a 11%, #0a0a0a 23%, #333333 24%, #333333 30%, #0a0a0a 31%, #0a0a0a 43%, #333333 44%, #333333 50%, #0a0a0a 51%, #0a0a0a 63%, #333333 64%, #333333 71%, transparent 71%, transparent),
+    radial-gradient(circle at 100% 50%, #333333 5%, #0a0a0a 6%, #0a0a0a 15%, #333333 16%, #333333 20%, #0a0a0a 21%, #0a0a0a 30%, #333333 31%, #333333 35%, #0a0a0a 36%, #0a0a0a 45%, #333333 46%, #333333 49%, transparent 50%, transparent),
+    radial-gradient(circle at 0 50%, #333333 5%, #0a0a0a 6%, #0a0a0a 15%, #333333 16%, #333333 20%, #0a0a0a 21%, #0a0a0a 30%, #333333 31%, #333333 35%, #0a0a0a 36%, #0a0a0a 45%, #333333 46%, #333333 49%, transparent 50%, transparent);
+  background-size: 80px 40px;
+  opacity: 0.7;
+  z-index: -1;
 }
 
 .cardFront {
