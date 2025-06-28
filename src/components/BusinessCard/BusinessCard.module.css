@@ -28,9 +28,16 @@
   border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 0 30px rgba(255, 255, 255, 0.05),
-    0 20px 40px rgba(0, 0, 0, 0.5);
+    /* Inner white glow */
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    /* Outer white glow */
+    0 0 0 2px rgba(255, 255, 255, 0.05),
+    /* Ambient light */
+    0 0 30px rgba(255, 255, 255, 0.1),
+    /* Edge highlight */
+    0 0 15px rgba(255, 255, 255, 0.15),
+    /* Drop shadow */
+    0 20px 40px rgba(0, 0, 0, 0.7);
 }
 
 .cardFace::before {
@@ -45,7 +52,7 @@
     radial-gradient(circle at 100% 50%, #444444 5%, #0a0a0a 6%, #0a0a0a 15%, #444444 16%, #444444 20%, #0a0a0a 21%, #0a0a0a 30%, #444444 31%, #444444 35%, #0a0a0a 36%, #0a0a0a 45%, #444444 46%, #444444 49%, transparent 50%, transparent),
     radial-gradient(circle at 0 50%, #444444 5%, #0a0a0a 6%, #0a0a0a 15%, #444444 16%, #444444 20%, #0a0a0a 21%, #0a0a0a 30%, #444444 31%, #444444 35%, #0a0a0a 36%, #0a0a0a 45%, #444444 46%, #444444 49%, transparent 50%, transparent);
   background-size: 80px 40px;
-  opacity: 0.7;
+  opacity: 0.8;
   z-index: -1;
 }
 

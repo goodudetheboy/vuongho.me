@@ -12,7 +12,7 @@
     {
       "company": "Bloomberg LP",
       "role": "Software Engineer",
-      "startDate": "Jan 2024",
+      "startDate": "Jun 2025",
       "endDate": "Present",
       "description": "Working on Bloomberg Terminal's core infrastructure and developer tools.",
       "achievements": [
@@ -28,7 +28,7 @@
       "company": "Rochester HCI Lab",
       "role": "Research Assistant",
       "startDate": "Mar 2024",
-      "endDate": "Present",
+      "endDate": "May 2025",
       "description": "Research and develop AI/ML-powered tools to assist deaf or hard-of-hearing children in early language development.",
       "achievements": [
         "Research and develop an AI/ML-powered tool to assist deaf or hard-of-hearing children in early language development",
@@ -137,32 +137,32 @@
     {
       "school": "University of Rochester",
       "degree": "M.S. Computer Science",
-      "startDate": "2022",
-      "endDate": "2023",
+      "startDate": "Aug 2024",
+      "endDate": "May 2025",
       "iconType": "image",
       "icon": "/images/institutions/u-of-rochester.png"
     },
     {
       "school": "University of Rochester",
-      "degree": "B.S. Computer Science",
-      "startDate": "2019",
-      "endDate": "2022",
+      "degree": "B.S. Computer Science & B.S. Applied Mathematics",
+      "startDate": "Aug 2020",
+      "endDate": "May 2024",
       "iconType": "image",
       "icon": "/images/institutions/u-of-rochester.png"
     },
     {
       "school": "High School for the Gifted",
-      "degree": "High School Diploma",
-      "startDate": "2016",
-      "endDate": "2019",
+      "degree": "High School",
+      "startDate": "Sep 2017",
+      "endDate": "Jun 2020",
       "iconType": "image",
       "icon": "/images/institutions/high-school-for-the-gifted.png"
     },
     {
       "school": "Tran Dai Nghia School",
-      "degree": "Middle School",
-      "startDate": "2012",
-      "endDate": "2016",
+      "degree": "Secondary School",
+      "startDate": "Sep 2013",
+      "endDate": "Jun 2017",
       "iconType": "image",
       "icon": "/images/institutions/tran-dai-nghia.png"
     }
