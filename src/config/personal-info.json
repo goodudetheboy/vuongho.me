@@ -1,0 +1,138 @@
+{
+  "name": {
+    "first": "Vuong",
+    "last": "Ho"
+  },
+  "title": "Software Engineer",
+  "company": "Bloomberg LP",
+  "location": "New York City",
+  "profileImage": "https://images2.imgbox.com/bf/1f/1ssTJDJs_o.jpg",
+
+  "experience": [
+    {
+      "company": "Bloomberg LP",
+      "role": "Software Engineer",
+      "startDate": "Jan 2024",
+      "endDate": "Present",
+      "description": "Working on Bloomberg Terminal's core infrastructure and developer tools.",
+      "achievements": [
+        "Developing and maintaining critical financial software systems",
+        "Collaborating with global teams on infrastructure improvements",
+        "Contributing to developer productivity tools"
+      ],
+      "technologies": ["C++", "JavaScript", "Python", "Bloomberg BDE"],
+      "icon": "terminal"
+    },
+    {
+      "company": "Meta",
+      "role": "Software Engineer Intern",
+      "startDate": "May 2023",
+      "endDate": "Aug 2023",
+      "description": "Worked on the Instagram Shopping team to develop new features and improve existing ones.",
+      "achievements": [
+        "Developed and shipped new shopping features",
+        "Improved performance of existing features",
+        "Collaborated with cross-functional teams"
+      ],
+      "technologies": ["React", "TypeScript", "GraphQL"],
+      "icon": "meta"
+    },
+    {
+      "company": "Google",
+      "role": "Software Engineer Intern",
+      "startDate": "May 2022",
+      "endDate": "Aug 2022",
+      "description": "Worked on the Chrome team to improve browser performance and user experience.",
+      "achievements": [
+        "Optimized Chrome's performance",
+        "Implemented new features",
+        "Fixed critical bugs"
+      ],
+      "technologies": ["C++", "JavaScript", "Chrome Extensions"],
+      "icon": "google"
+    },
+    {
+      "company": "University of Rochester",
+      "role": "HCI Lab, MSCS",
+      "startDate": "Sep 2023",
+      "endDate": "Present",
+      "icon": "uofr",
+      "link": "https://rochester.edu",
+      "description": "Conducting research in Human-Computer Interaction, focusing on novel interaction techniques and accessibility.",
+      "achievements": [
+        "Published paper at CHI 2024",
+        "Developed new gesture recognition system",
+        "Mentored undergraduate researchers"
+      ],
+      "technologies": ["Python", "TensorFlow", "OpenCV", "React"]
+    },
+    {
+      "company": "University of Rochester",
+      "role": "Alma Mater",
+      "startDate": "Sep 2019",
+      "endDate": "May 2023",
+      "icon": "uofr",
+      "link": "https://rochester.edu",
+      "description": "Bachelor's in Computer Science with a minor in Human-Computer Interaction. Focus on software engineering and user experience design.",
+      "achievements": [
+        "GPA: 3.95/4.0",
+        "Dean's List all semesters",
+        "Senior thesis on AR interfaces"
+      ],
+      "technologies": ["Java", "Python", "Web Dev", "Unity"]
+    }
+  ],
+  "education": [
+    {
+      "school": "University of Rochester",
+      "degree": "M.S. Computer Science",
+      "startDate": "2022",
+      "endDate": "2023",
+      "icon": "uofr"
+    },
+    {
+      "school": "University of Rochester",
+      "degree": "B.S. Computer Science",
+      "startDate": "2019",
+      "endDate": "2022",
+      "icon": "uofr"
+    },
+    {
+      "school": "High School for the Gifted",
+      "degree": "High School Diploma",
+      "startDate": "2016",
+      "endDate": "2019",
+      "icon": "school"
+    },
+    {
+      "school": "Tran Dai Nghia School",
+      "degree": "Middle School",
+      "startDate": "2012",
+      "endDate": "2016",
+      "icon": "school"
+    }
+  ],
+  "socialLinks": [
+    {
+      "platform": "GitHub",
+      "link": "https://github.com/vuonghoang",
+      "icon": "github"
+    },
+    {
+      "platform": "LinkedIn",
+      "link": "https://linkedin.com/in/vuonghoang",
+      "icon": "linkedin"
+    },
+    {
+      "platform": "Email",
+      "link": "mailto:vuong@example.com",
+      "icon": "email"
+    }
+  ],
+  "theme": {
+    "cardBackground": "#111111",
+    "primaryText": "#ffffff",
+    "secondaryText": "#aaaaaa",
+    "accentColor": "#00ffc8"
+  }
+} 
