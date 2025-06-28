@@ -17,17 +17,18 @@ A minimalist, mobile-first **digital business card** that:
 
 #### 1. **Front of Card (Default View)**
 
-* **Background**: solid dark color (`#0a0a0a`), subtle animated texture
+* **Background**: Dark background with damascus pattern
 * **Left**: portrait image (circular, shadowed)
 * **Right**:
   * Large name: `Vuong Ho` in a bold, clean sans-serif (`Space Grotesk`)
   * Subtitle: Current role and location
 * **Entire card is horizontally centered and responsive**
+* **Mobile Layout**: Vertical arrangement with image on top
 
 #### 2. **Back of Card (Flip View)**
 
 * **Flip Animation**: smooth CSS transform with spring animation
-* **Background**: same dark tone
+* **Background**: same dark tone with damascus pattern
 * **Content Sections**:
 
   ##### Education Section
@@ -37,6 +38,7 @@ A minimalist, mobile-first **digital business card** that:
   * First item auto-expands on load
   * Mouse wheel scrolling enabled
   * Hidden scrollbars with maintained functionality
+  * Scroll indicators for navigation
 
   ##### Experience Section
   * Horizontal scrollable list of companies/roles
@@ -46,7 +48,7 @@ A minimalist, mobile-first **digital business card** that:
   * Mouse wheel scrolling enabled
   * Hidden scrollbars
   * Scroll indicators:
-    * Appear next to "Experience" title (left/right)
+    * Appear next to section title (left/right)
     * Show only when meaningful scroll space available (>20px threshold)
     * Fade in/out smoothly
     * Left indicator shows when scrolled right
@@ -55,6 +57,7 @@ A minimalist, mobile-first **digital business card** that:
   
   ##### Connect Section
   * Social media and contact links
+  * Center-aligned icons
   * Animated hover effects
   * Icons with labels
 
@@ -84,12 +87,38 @@ A minimalist, mobile-first **digital business card** that:
 }
 ```
 
+#### Card Design
+* **Damascus Pattern**:
+  * Complex radial gradient pattern
+  * Light (#444444) and dark (#0a0a0a) contrasting colors
+  * 80px x 40px pattern size
+  * 0.7 opacity for subtle effect
+
+* **Card Shadow**:
+  * White border: `0 0 0 1px rgba(255, 255, 255, 0.1)`
+  * Ambient glow: `0 0 30px rgba(255, 255, 255, 0.05)`
+  * Drop shadow: `0 20px 40px rgba(0, 0, 0, 0.5)`
+
+#### Background Design
+* **Metal Texture**:
+  * Base color: #1a1a1a
+  * Diagonal pattern with #222222 accents
+  * Multiple gradient layers for depth
+  * Animated glow effect:
+    * Horizontal movement
+    * 20s animation duration
+    * Fade in/out at edges
+    * 75% width centered beam
+    * Light intensity varies from 5% to 10%
+    * Smooth ease-in-out transitions
+
 #### Animations
 * Card flip: Spring animation
 * Content expansion: Smooth height transitions
 * Scroll indicators: Fade in/out
 * Modal: Scale and fade transitions
 * Hover effects: Subtle scaling
+* Background glow: Smooth horizontal movement
 
 ---
 
@@ -137,7 +166,8 @@ A minimalist, mobile-first **digital business card** that:
 ### 📱 Responsiveness
 
 * **Mobile-first design**
-* **Landscape optimization** for mobile viewing
+* **Vertical card layout** on mobile (3:5 aspect ratio)
+* **Horizontal card layout** on desktop (1.618:1 aspect ratio)
 * **Fluid typography** and spacing
 * **Responsive grid** for different screen sizes
 * **Touch-friendly** interaction areas

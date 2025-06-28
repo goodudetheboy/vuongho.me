@@ -21,7 +21,8 @@
         "Contributing to developer productivity tools"
       ],
       "technologies": ["C++", "JavaScript", "Python", "Bloomberg BDE"],
-      "icon": "terminal"
+      "iconType": "image",
+      "icon": "/images/institutions/bloomberg.png"
     },
     {
       "company": "Rochester HCI Lab",
@@ -36,7 +37,8 @@
         "Author comprehensive documentation and contribute to the drafting, writing, and editing of 3+ academic papers"
       ],
       "technologies": ["Python", "Flask", "Docker", "AWS", "BERT", "JavaScript"],
-      "icon": "lab"
+      "iconType": "image",
+      "icon": "/images/institutions/roc-hci.png"
     },
     {
       "company": "Meta",
@@ -51,7 +53,8 @@
         "Implemented extensive monitoring using Prometheus and cAdvisor with Grafana, reducing system downtime by 30%"
       ],
       "technologies": ["Python", "Flask", "Docker", "MySQL", "Nginx", "Prometheus", "Grafana"],
-      "icon": "meta"
+      "iconType": "image",
+      "icon": "/images/institutions/meta.png"
     },
     {
       "company": "HISSC",
@@ -65,7 +68,8 @@
         "Conducted data analysis to optimize ML models, resulting in 30% increase in detection accuracy"
       ],
       "technologies": ["Elastic ML", "Linux", "Windows", "Security Analytics"],
-      "icon": "shield"
+      "iconType": "image",
+      "icon": "/images/institutions/hissc.png"
     },
     {
       "company": "Startup",
@@ -79,6 +83,7 @@
         "Scaled system to support ~15K concurrent users"
       ],
       "technologies": ["Flutter", "React", "Firebase", "Node.js"],
+      "iconType": "icon",
       "icon": "rocket"
     },
     {
@@ -93,7 +98,8 @@
         "Reduced server cost by 25% through Firebase function optimization"
       ],
       "technologies": ["React", "TypeScript", "Firebase"],
-      "icon": "code"
+      "iconType": "image",
+      "icon": "/images/institutions/vietnam-tech-society.png"
     },
     {
       "company": "Yolo Shadow",
@@ -107,7 +113,8 @@
         "Resolved 8 database bugs and added 5+ comprehensive test cases"
       ],
       "technologies": ["React", "MongoDB", "Mongoose", "REST APIs"],
-      "icon": "code"
+      "iconType": "image",
+      "icon": "/images/institutions/yolo-shadow.png"
     },
     {
       "company": "Google",
@@ -122,7 +129,8 @@
         "Contributed 20+ bug fixes and improvements to Maven Central libraries"
       ],
       "technologies": ["Java", "Gradle", "Android", "GitHub Actions"],
-      "icon": "google"
+      "iconType": "image",
+      "icon": "/images/institutions/google.png"
     }
   ],
   "education": [
@@ -131,28 +139,32 @@
       "degree": "M.S. Computer Science",
       "startDate": "2022",
       "endDate": "2023",
-      "icon": "uofr"
+      "iconType": "image",
+      "icon": "/images/institutions/u-of-rochester.png"
     },
     {
       "school": "University of Rochester",
       "degree": "B.S. Computer Science",
       "startDate": "2019",
       "endDate": "2022",
-      "icon": "uofr"
+      "iconType": "image",
+      "icon": "/images/institutions/u-of-rochester.png"
     },
     {
       "school": "High School for the Gifted",
       "degree": "High School Diploma",
       "startDate": "2016",
       "endDate": "2019",
-      "icon": "school"
+      "iconType": "image",
+      "icon": "/images/institutions/high-school-for-the-gifted.png"
     },
     {
       "school": "Tran Dai Nghia School",
       "degree": "Middle School",
       "startDate": "2012",
       "endDate": "2016",
-      "icon": "school"
+      "iconType": "image",
+      "icon": "/images/institutions/tran-dai-nghia.png"
     }
   ],
   "socialLinks": [

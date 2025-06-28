@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaTimes, FaInfoCircle, FaTerminal, Fa
 import { SiMeta, SiGoogle } from 'react-icons/si';
 import { IoSchool } from 'react-icons/io5';
 import { PiGraduationCap } from 'react-icons/pi';
+import Image from 'next/image';
 import clsx from 'clsx';
 
 interface CardBackProps {
@@ -24,6 +25,30 @@ const iconMap = {
   rocket: FaRocket,
   code: FaCode,
   lab: FaFlask
+};
+
+interface IconProps {
+  iconType: 'icon' | 'image';
+  icon: string;
+  className?: string;
+}
+
+const IconComponent = ({ iconType, icon, className = "" }: IconProps) => {
+  if (iconType === 'image') {
+    return (
+      <div className={clsx("relative w-8 h-8", className)}>
+        <Image
+          src={icon}
+          alt="Institution icon"
+          fill
+          className="object-contain"
+        />
+      </div>
+    );
+  }
+
+  const Icon = iconMap[icon as keyof typeof iconMap];
+  return <Icon className={clsx("text-2xl", className)} />;
 };
 
 export default function CardBack({ info }: CardBackProps) {
@@ -135,7 +160,6 @@ export default function CardBack({ info }: CardBackProps) {
               onScroll={() => checkScrollable(eduScrollRef.current, setEduScrollState)}
             >
               {info.education.map((edu, index) => {
-                const Icon = iconMap[edu.icon as keyof typeof iconMap];
                 const isExpanded = expandedEduIndex === index;
                 
                 return (
@@ -143,7 +167,7 @@ export default function CardBack({ info }: CardBackProps) {
                     key={edu.school + index}
                     className="relative h-full flex-shrink-0"
                     animate={{
-                      width: isExpanded ? 'auto' : '3rem',
+                      width: isExpanded ? 'auto' : '4rem',
                     }}
                     transition={{
                       type: "spring",
@@ -167,7 +191,11 @@ export default function CardBack({ info }: CardBackProps) {
                         className="flex items-center gap-3 cursor-pointer"
                         onClick={() => setExpandedEduIndex(isExpanded ? null : index)}
                       >
-                        <Icon className="text-2xl text-white/80 flex-shrink-0" />
+                        <IconComponent 
+                          iconType={edu.iconType}
+                          icon={edu.icon}
+                          className="text-white/80 flex-shrink-0"
+                        />
                         <motion.div
                           animate={{
                             opacity: isExpanded ? 1 : 0,
@@ -197,77 +225,83 @@ export default function CardBack({ info }: CardBackProps) {
             <h2 className="text-white/80 text-lg">Experience</h2>
             <RightIndicator show={expScrollState.canScrollRight} />
           </div>
-          <div 
-            ref={expScrollRef}
-            className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar"
-            onWheel={handleWheel}
-            onScroll={() => checkScrollable(expScrollRef.current, setExpScrollState)}
-          >
-            {info.experience.map((exp, index) => {
-              const Icon = iconMap[exp.icon as keyof typeof iconMap];
-              const isExpanded = expandedExpIndex === index;
-              
-              return (
-                <motion.div
-                  key={exp.company + index}
-                  className="relative h-full flex-shrink-0"
-                  animate={{
-                    width: isExpanded ? 'auto' : '3rem',
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 30
-                  }}
-                >
+          <div className="relative">
+            <div 
+              ref={expScrollRef}
+              className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar"
+              onWheel={handleWheel}
+              onScroll={() => checkScrollable(expScrollRef.current, setExpScrollState)}
+            >
+              {info.experience.map((exp, index) => {
+                const isExpanded = expandedExpIndex === index;
+
+                return (
                   <motion.div
-                    className={clsx(
-                      "h-full rounded-xl",
-                      "bg-white/5 hover:bg-white/10",
-                      "transition-colors duration-200",
-                      "flex items-center gap-3",
-                      "px-3 relative"
-                    )}
+                    key={exp.company + index}
+                    className="relative h-full flex-shrink-0"
                     animate={{
-                      paddingRight: isExpanded ? '2.5rem' : '0.75rem',
+                      width: isExpanded ? 'auto' : '4rem',
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30
                     }}
                   >
-                    <div 
-                      className="flex items-center gap-3 cursor-pointer"
-                      onClick={() => setExpandedExpIndex(isExpanded ? null : index)}
+                    <motion.div
+                      className={clsx(
+                        "h-full rounded-xl",
+                        "bg-white/5 hover:bg-white/10",
+                        "transition-colors duration-200",
+                        "flex items-center gap-3",
+                        "px-3 relative"
+                      )}
+                      animate={{
+                        paddingRight: isExpanded ? '1rem' : '0.75rem',
+                      }}
                     >
-                      <Icon className="text-2xl text-white/80 flex-shrink-0" />
-                      <motion.div
-                        animate={{
-                          opacity: isExpanded ? 1 : 0,
-                          width: isExpanded ? 'auto' : 0,
-                        }}
-                        className="overflow-hidden whitespace-nowrap"
-                      >
-                        <p className="font-medium text-white">{exp.company}</p>
-                        <p className="text-sm text-white/60">{exp.role}</p>
-                        <p className="text-xs text-white/40">
-                          {exp.startDate} - {exp.endDate}
-                        </p>
-                      </motion.div>
-                    </div>
-                    {isExpanded && (
-                      <motion.button
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-white/10 rounded-full transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedExp(exp);
+                      <div 
+                        className="flex items-center gap-3 cursor-pointer"
+                        onClick={() => {
+                          setExpandedExpIndex(isExpanded ? null : index);
+                          setSelectedExp(null);
                         }}
                       >
-                        <FaInfoCircle className="text-white/60 text-lg" />
-                      </motion.button>
-                    )}
+                        <IconComponent 
+                          iconType={exp.iconType}
+                          icon={exp.icon}
+                          className="text-white/80 flex-shrink-0"
+                        />
+                        <motion.div
+                          animate={{
+                            opacity: isExpanded ? 1 : 0,
+                            width: isExpanded ? 'auto' : 0,
+                          }}
+                          className="overflow-hidden whitespace-nowrap"
+                        >
+                          <div className="flex items-center gap-2">
+                            <p className="font-medium text-white">{exp.company}</p>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedExp(exp);
+                              }}
+                              className="text-white/40 hover:text-white/60 transition-colors"
+                            >
+                              <FaInfoCircle />
+                            </button>
+                          </div>
+                          <p className="text-sm text-white/60">{exp.role}</p>
+                          <p className="text-xs text-white/40">
+                            {exp.startDate} - {exp.endDate}
+                          </p>
+                        </motion.div>
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </section>
 
@@ -333,8 +367,8 @@ export default function CardBack({ info }: CardBackProps) {
               <div>
                 <h3 className="text-white/80 font-medium mb-2">Key Achievements</h3>
                 <ul className="list-disc list-inside space-y-1">
-                  {selectedExp.achievements.map((achievement, index) => (
-                    <li key={index} className="text-white/60">{achievement}</li>
+                  {selectedExp.achievements.map((achievement: string, index: number) => (
+                    <li key={index} className="text-white/80">{achievement}</li>
                   ))}
                 </ul>
               </div>
@@ -342,10 +376,10 @@ export default function CardBack({ info }: CardBackProps) {
               <div>
                 <h3 className="text-white/80 font-medium mb-2">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedExp.technologies.map((tech, index) => (
+                  {selectedExp.technologies.map((tech: string, index: number) => (
                     <span
                       key={index}
-                      className="px-3 py-1 rounded-full bg-white/10 text-sm text-white/80"
+                      className="px-2 py-1 bg-white/10 rounded text-sm"
                     >
                       {tech}
                     </span>
