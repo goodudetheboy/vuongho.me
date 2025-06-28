@@ -24,62 +24,105 @@
       "icon": "terminal"
     },
     {
-      "company": "Meta",
-      "role": "Software Engineer Intern",
-      "startDate": "May 2023",
-      "endDate": "Aug 2023",
-      "description": "Worked on the Instagram Shopping team to develop new features and improve existing ones.",
+      "company": "Rochester HCI Lab",
+      "role": "Research Assistant",
+      "startDate": "Mar 2024",
+      "endDate": "Present",
+      "description": "Research and develop AI/ML-powered tools to assist deaf or hard-of-hearing children in early language development.",
       "achievements": [
-        "Developed and shipped new shopping features",
-        "Improved performance of existing features",
-        "Collaborated with cross-functional teams"
+        "Research and develop an AI/ML-powered tool to assist deaf or hard-of-hearing children in early language development",
+        "Implement ASL word recommendation strategies with Stanza pipelines, BERT models, and part-of-speech analysis",
+        "Rearchitect the legacy system into a portable version with Flask, JavaScript, and Docker and deploy it on AWS",
+        "Author comprehensive documentation and contribute to the drafting, writing, and editing of 3+ academic papers"
       ],
-      "technologies": ["React", "TypeScript", "GraphQL"],
+      "technologies": ["Python", "Flask", "Docker", "AWS", "BERT", "JavaScript"],
+      "icon": "lab"
+    },
+    {
+      "company": "Meta",
+      "role": "Production Engineering Fellow",
+      "startDate": "Jun 2024",
+      "endDate": "Sep 2024",
+      "description": "Selected as one of the top 2% out of 2,500 applicants for the elite Meta & MLH Production Engineering Fellowship.",
+      "achievements": [
+        "Developed a dynamic blogging application and REST APIs with Python, Flask, and Javascript with MySQL database",
+        "Administered and deployed on Linux systems on cloud with Nginx reverse proxy and auto-renewing SSL certificates",
+        "Leveraged Docker, GitHub Actions for CI/CD, and test-driven development, achieving 90% faster deployment times",
+        "Implemented extensive monitoring using Prometheus and cAdvisor with Grafana, reducing system downtime by 30%"
+      ],
+      "technologies": ["Python", "Flask", "Docker", "MySQL", "Nginx", "Prometheus", "Grafana"],
       "icon": "meta"
+    },
+    {
+      "company": "HISSC",
+      "role": "Machine Learning Engineer Intern",
+      "startDate": "May 2023",
+      "endDate": "Jul 2023",
+      "description": "Worked on enhancing threat detection for city web servers using machine learning.",
+      "achievements": [
+        "Leveraged Elastic ML to deploy 20 ML-based security rules for enhancing threat detection",
+        "Managed a Fleet of 11 Elastic Agents to collect and process system logs of 5 Windows and Linux infrastructures",
+        "Conducted data analysis to optimize ML models, resulting in 30% increase in detection accuracy"
+      ],
+      "technologies": ["Elastic ML", "Linux", "Windows", "Security Analytics"],
+      "icon": "shield"
+    },
+    {
+      "company": "Startup",
+      "role": "Founder & Lead Software Engineer",
+      "startDate": "Dec 2022",
+      "endDate": "Oct 2023",
+      "description": "Led development of a healthcare appointment scheduling system.",
+      "achievements": [
+        "Drove the development of an app allowing patients to schedule appointments in advance at participating hospitals",
+        "Orchestrated a 3-person team to deliver a multi-component system with Flutter mobile app, React web app, and Firebase backend",
+        "Scaled system to support ~15K concurrent users"
+      ],
+      "technologies": ["Flutter", "React", "Firebase", "Node.js"],
+      "icon": "rocket"
+    },
+    {
+      "company": "Vietnam Tech Society",
+      "role": "Software Engineer Intern",
+      "startDate": "Jun 2022",
+      "endDate": "Jan 2023",
+      "description": "Developed appointment scheduling and availability management features.",
+      "achievements": [
+        "Delivered a React TypeScript and Firebase project for configuring and filtering appointment availability",
+        "Deployed the 'Filter by Availability' feature with 100% test coverage, improving usability by 90%",
+        "Reduced server cost by 25% through Firebase function optimization"
+      ],
+      "technologies": ["React", "TypeScript", "Firebase"],
+      "icon": "code"
+    },
+    {
+      "company": "Yolo Shadow",
+      "role": "Software Engineer Intern",
+      "startDate": "Sep 2021",
+      "endDate": "Jan 2022",
+      "description": "Built partner management dashboard and optimized backend performance.",
+      "achievements": [
+        "Developed a dashboard for 30+ partners to manage their event pages using React and Mongoose",
+        "Optimized REST APIs backend, reducing response times by 20% during peak traffic",
+        "Resolved 8 database bugs and added 5+ comprehensive test cases"
+      ],
+      "technologies": ["React", "MongoDB", "Mongoose", "REST APIs"],
+      "icon": "code"
     },
     {
       "company": "Google",
       "role": "Software Engineer Intern",
-      "startDate": "May 2022",
-      "endDate": "Aug 2022",
-      "description": "Worked on the Chrome team to improve browser performance and user experience.",
+      "startDate": "May 2021",
+      "endDate": "Aug 2021",
+      "description": "Summer of Code 2021: Contributed to OpenStreetMap's Vespucci Android app.",
       "achievements": [
-        "Optimized Chrome's performance",
-        "Implemented new features",
-        "Fixed critical bugs"
+        "Engineered a key feature for evaluating user input opening hours",
+        "Implemented an evaluator processing opening hours of 140,000+ locations with Java and Gradle",
+        "Supported a grammar system of 80+ rules, expanding coverage from 10% to ~100%",
+        "Contributed 20+ bug fixes and improvements to Maven Central libraries"
       ],
-      "technologies": ["C++", "JavaScript", "Chrome Extensions"],
+      "technologies": ["Java", "Gradle", "Android", "GitHub Actions"],
       "icon": "google"
-    },
-    {
-      "company": "University of Rochester",
-      "role": "HCI Lab, MSCS",
-      "startDate": "Sep 2023",
-      "endDate": "Present",
-      "icon": "uofr",
-      "link": "https://rochester.edu",
-      "description": "Conducting research in Human-Computer Interaction, focusing on novel interaction techniques and accessibility.",
-      "achievements": [
-        "Published paper at CHI 2024",
-        "Developed new gesture recognition system",
-        "Mentored undergraduate researchers"
-      ],
-      "technologies": ["Python", "TensorFlow", "OpenCV", "React"]
-    },
-    {
-      "company": "University of Rochester",
-      "role": "Alma Mater",
-      "startDate": "Sep 2019",
-      "endDate": "May 2023",
-      "icon": "uofr",
-      "link": "https://rochester.edu",
-      "description": "Bachelor's in Computer Science with a minor in Human-Computer Interaction. Focus on software engineering and user experience design.",
-      "achievements": [
-        "GPA: 3.95/4.0",
-        "Dean's List all semesters",
-        "Senior thesis on AR interfaces"
-      ],
-      "technologies": ["Java", "Python", "Web Dev", "Unity"]
     }
   ],
   "education": [
@@ -115,17 +158,17 @@
   "socialLinks": [
     {
       "platform": "GitHub",
-      "link": "https://github.com/vuonghoang",
+      "link": "https://github.com/goodudetheboy",
       "icon": "github"
     },
     {
       "platform": "LinkedIn",
-      "link": "https://linkedin.com/in/vuonghoang",
+      "link": "https://linkedin.com/in/vuongho",
       "icon": "linkedin"
     },
     {
       "platform": "Email",
-      "link": "mailto:vuong@example.com",
+      "link": "mailto:vuong@vuongho.me",
       "icon": "email"
     }
   ],
