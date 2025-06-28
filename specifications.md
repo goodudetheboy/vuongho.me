@@ -6,10 +6,10 @@ A minimalist, mobile-first **digital business card** that:
 
 * Shows your **name, title, and image** on the front.
 * Flips horizontally on tap to reveal the **back** side with:
-
-  * Logo links to workplace, school, and contact points.
-  * Each icon reveals extra text or a small modal on tap.
-* Built for high polish with animations, subtle interactivity, and a **dark mode aesthetic**.
+  * Education history with expandable details
+  * Work experience timeline with expandable details
+  * Logo links to workplace, school, and contact points
+* Built for high polish with animations, subtle interactivity, and a **dark mode aesthetic**
 
 ---
 
@@ -17,109 +17,201 @@ A minimalist, mobile-first **digital business card** that:
 
 #### 1. **Front of Card (Default View)**
 
-* **Background**: solid dark color (`#0a0a0a`), subtle animated texture (e.g., particles.js or pure CSS noise).
-* **Left**: your portrait image (circular, shadowed, maybe light glow).
+* **Background**: solid dark color (`#0a0a0a`), subtle animated texture
+* **Left**: portrait image (circular, shadowed)
 * **Right**:
+  * Large name: `Vuong Ho` in a bold, clean sans-serif (`Space Grotesk`)
+  * Subtitle: Current role and location
+* **Entire card is horizontally centered and responsive**
 
-  * Large name: `Vuong Ho` in a bold, clean sans-serif (e.g., `Space Grotesk`, `Inter`, or `Satoshi`).
-  * Subtitle: e.g., “Software Engineer @ Bloomberg, NYC”.
-* **Entire card is horizontally centered and responsive**, designed to feel like a real business card when viewed in landscape on mobile.
+#### 2. **Back of Card (Flip View)**
 
-#### 2. **Back of Card (Tap/Flip View)**
+* **Flip Animation**: smooth CSS transform with spring animation
+* **Background**: same dark tone
+* **Content Sections**:
 
-* **Flip Animation**: smooth CSS `transform: rotateY(180deg)` (can use `react-card-flip` or hand-rolled).
-* **Background**: same dark tone.
-* **Content**:
+  ##### Education Section
+  * Horizontal scrollable list of institutions
+  * Each institution has an icon (e.g., 🎓 for schools)
+  * Click to expand/collapse details
+  * First item auto-expands on load
+  * Mouse wheel scrolling enabled
+  * Hidden scrollbars with maintained functionality
 
-  * A row or grid of logos/icons:
+  ##### Experience Section
+  * Horizontal scrollable list of companies/roles
+  * Company-specific icons (e.g., terminal, lab, shield, rocket icons)
+  * Click to expand/collapse details
+  * First item auto-expands on load
+  * Mouse wheel scrolling enabled
+  * Hidden scrollbars
+  * Scroll indicators:
+    * Appear next to "Experience" title (left/right)
+    * Show only when meaningful scroll space available (>20px threshold)
+    * Fade in/out smoothly
+    * Left indicator shows when scrolled right
+    * Right indicator shows when more content available
+    * Semi-transparent white icons (60% opacity)
+  
+  ##### Connect Section
+  * Social media and contact links
+  * Animated hover effects
+  * Icons with labels
 
-    * 🧠 Meta (Internship)
-    * 🔍 Google (Internship)
-    * 🧪 University of Rochester (HCI Lab, MSCS)
-    * 🎓 University of Rochester (Alma Mater)
-    * ✉️ Email
-    * 🐙 GitHub
-    * 🔗 LinkedIn
-  * On tap/click: each icon expands or reveals a small tooltip/text like:
-
-    * `"SWE Intern @ Meta – Summer 2023"`
-    * `"MSCS, HCI Research Assistant"`
-* **Animations**:
-
-  * On hover/tap: subtle grow or glow.
-  * Optional tooltip/modal effect.
-
----
-
-### 📱 Responsiveness
-
-* **Mobile-first design** (use media queries to adapt to desktops).
-* **Landscape priority on phones**: suggest `orientation: landscape` for ideal experience.
-* **Single-page with no scrolling**—everything fits neatly within the viewport.
+* **Modal View**:
+  * Detailed experience view
+  * Accessible via info button
+  * Shows full role description
+  * Smooth enter/exit animations
 
 ---
 
 ### 🎨 Visual Design
 
 #### Fonts
-
-* `Space Grotesk` (Google Fonts)
+* Primary: `Space Grotesk` (Google Fonts)
+* Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
 * Fallback: `sans-serif`
 
 #### Colors
-
 ```css
 :root {
   --bg: #0a0a0a;
   --card-bg: #111111;
   --text-primary: #ffffff;
-  --text-secondary: #aaaaaa;
-  --accent: #00ffc8;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-tertiary: rgba(255, 255, 255, 0.6);
 }
 ```
 
-#### Theme
+#### Animations
+* Card flip: Spring animation
+* Content expansion: Smooth height transitions
+* Scroll indicators: Fade in/out
+* Modal: Scale and fade transitions
+* Hover effects: Subtle scaling
 
-* **Dark Mode Only**.
-* **Minimal glow, soft shadows**, rounded corners (`border-radius: 1.5rem`).
-* Flat design with emphasis on typography and interaction.
+---
+
+### 🔧 Interaction Details
+
+#### Scrolling Behavior
+* Mouse wheel scrolls horizontally
+* No drag-to-scroll (removed for cleaner interaction)
+* Hidden scrollbars using CSS utilities:
+```css
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+```
+
+#### Expandable Items
+* Click to expand/collapse
+* First items auto-expand on mount
+* Smooth height transitions
+* Maintains scroll position when expanding
+
+#### Modal Interaction
+* Click info button to open
+* Click outside or close button to dismiss
+* Prevents background interaction while open
+* Keyboard accessible (Escape to close)
 
 ---
 
 ### ⚙️ Technologies
 
-* **React.js** (or HTML/CSS/JS if you want pure frontend)
-* CSS modules or TailwindCSS (optional)
-* Flip animation: `react-card-flip` or custom CSS
-* Icon set: `react-icons`, SVG, or PNG
-* Hosting: GitHub Pages / Vercel / Cloudflare Pages
+* **Next.js 14**: React framework
+* **TailwindCSS**: Styling
+* **Framer Motion**: Animations
+* **React Icons**: Icon set
+* **TypeScript**: Type safety
+* **CSS Modules**: Component-specific styles
 
 ---
 
-### 🧠 Extra Enhancements (Optional)
+### 📱 Responsiveness
 
-| Feature            | Description                                     |
-| ------------------ | ----------------------------------------------- |
-| Favicon + meta     | Custom favicon and social preview image         |
-| Vibration feedback | Use mobile haptics on tap (`navigator.vibrate`) |
-| SEO                | Basic meta tags for Google indexing             |
-| Animated name glow | Subtle text-shadow pulse for name on hover      |
-| Accessibility      | Aria-labels for icons                           |
+* **Mobile-first design**
+* **Landscape optimization** for mobile viewing
+* **Fluid typography** and spacing
+* **Responsive grid** for different screen sizes
+* **Touch-friendly** interaction areas
 
 ---
 
-### 🔧 Suggested Folder Structure
+### 🧠 Data Structure
 
+#### Personal Info
+```typescript
+interface PersonalInfo {
+  name: string;
+  title: string;
+  location: string;
+  education: Education[];
+  experience: Experience[];
+  contact: Contact;
+}
+
+interface Experience {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  technologies: string[];
+  icon: IconType;
+}
+
+interface Education {
+  institution: string;
+  degree: string;
+  period: string;
+  details: string[];
+  icon: IconType;
+}
+
+interface Contact {
+  email: string;
+  github: string;
+  linkedin: string;
+}
+```
+
+---
+
+### 🔍 SEO & Accessibility
+
+* **Meta tags** for social sharing
+* **Semantic HTML** structure
+* **ARIA labels** for interactive elements
+* **Keyboard navigation** support
+* **Color contrast** compliance
+* **Alt text** for images
+
+---
+
+### 📂 Project Structure
 ```
 /src
+  /app
+    globals.css
+    layout.tsx
+    page.tsx
   /components
-    CardFront.jsx
-    CardBack.jsx
-    IconLink.jsx
-  /assets
-    /images (your photo, logos)
-  App.jsx
-  index.css or tailwind.css
-public/
-  index.html
+    /BusinessCard
+      BusinessCard.module.css
+      BusinessCard.tsx
+      CardBack.tsx
+      CardFront.tsx
+      index.ts
+  /config
+    personal-info.json
+  /types
+    personal-info.ts
+/public
+  /images
 ```
