@@ -28,7 +28,7 @@ const iconMap = {
 };
 
 interface IconProps {
-  iconType: 'icon' | 'image';
+  iconType: string | 'icon' | 'image';
   icon: string;
   className?: string;
 }

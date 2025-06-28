@@ -6,7 +6,7 @@ export interface Experience {
   description: string;
   achievements: string[];
   technologies: string[];
-  iconType: 'icon' | 'image';
+  iconType: string | 'icon' | 'image';
   icon: string;
 }
 
@@ -15,7 +15,7 @@ export interface Education {
   degree: string;
   startDate: string;
   endDate: string;
-  iconType: 'icon' | 'image';
+  iconType: string | 'icon' | 'image';
   icon: string;
 }
 
