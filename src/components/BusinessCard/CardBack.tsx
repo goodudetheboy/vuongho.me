@@ -10,6 +10,7 @@ import clsx from 'clsx';
 
 interface CardBackProps {
   info: PersonalInfo;
+  onBack?: () => void;
 }
 
 const iconMap = {
@@ -51,7 +52,7 @@ const IconComponent = ({ iconType, icon, className = "" }: IconProps) => {
   return <Icon className={clsx("text-2xl", className)} />;
 };
 
-export default function CardBack({ info }: CardBackProps) {
+export default function CardBack({ info, onBack }: CardBackProps) {
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
   const [expandedExpIndex, setExpandedExpIndex] = useState<number | null>(null);
   const [expandedEduIndex, setExpandedEduIndex] = useState<number | null>(null);
@@ -144,6 +145,20 @@ export default function CardBack({ info }: CardBackProps) {
     <div 
       className="w-full h-full p-8 relative bg-[#111111]/95"
     >
+      {onBack && (
+        <motion.button
+          onClick={(e) => {
+            e.stopPropagation();
+            onBack();
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Flip back to front"
+          className="absolute top-4 left-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 transition-colors"
+        >
+          <FaChevronLeft className="text-xl" />
+        </motion.button>
+      )}
       <div className="h-full flex flex-col gap-6 md:gap-8">
         {/* Education Section */}
         <section>

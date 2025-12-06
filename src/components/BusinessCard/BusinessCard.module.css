@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.notClickable {
+  cursor: default;
+}
+
 .cardInner {
   position: relative;
   width: 100%;

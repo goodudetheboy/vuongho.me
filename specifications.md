@@ -124,6 +124,15 @@ A minimalist, mobile-first **digital business card** that:
 
 ### 🔧 Interaction Details
 
+#### Flipping Behavior
+* Front view:
+  * Clicking anywhere on the card flips it to the back.
+  * Pointer cursor shown to indicate clickability.
+* Back view:
+  * Card surface is not clickable for flipping.
+  * A back icon button (top-left of the card) appears; click it to flip to the front.
+  * Pointer cursor is normal (no click affordance) on the card background.
+
 #### Scrolling Behavior
 * Mouse wheel scrolls horizontally
 * No drag-to-scroll (removed for cleaner interaction)
