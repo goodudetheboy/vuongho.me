@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        // Landscape phones and other short viewports, where the card is small.
+        short: { raw: '(max-height: 500px)' },
+      },
       fontFamily: {
         sans: ['Space Grotesk', 'sans-serif'],
       },

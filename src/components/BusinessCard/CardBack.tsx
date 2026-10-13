@@ -97,9 +97,9 @@ function ScrollSection({ title, className, children }: { title: string; classNam
 
   return (
     <section className={className}>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-2 short:mb-1">
         {indicator(scroll.canScrollLeft, FaChevronLeft)}
-        <h2 className="text-white/80 text-lg">{title}</h2>
+        <h2 className="text-white/80 text-lg short:text-base">{title}</h2>
         {indicator(scroll.canScrollRight, FaChevronRight)}
       </div>
       <div ref={ref} className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar">
@@ -179,7 +179,7 @@ export default function CardBack({ info, onBack }: CardBackProps) {
   }, [selectedExp]);
 
   return (
-    <div className="w-full h-full p-8 relative bg-[#111111]/95">
+    <div className="w-full h-full px-6 md:px-8 pt-14 pb-6 short:pt-12 short:pb-3 relative bg-[#111111]/95">
       {onBack && (
         <button
           onClick={(e) => {
@@ -193,7 +193,7 @@ export default function CardBack({ info, onBack }: CardBackProps) {
           <FaChevronLeft className="text-xl" />
         </button>
       )}
-      <div className="h-full flex flex-col gap-6 md:gap-8">
+      <div className="h-full flex flex-col justify-center gap-8 md:justify-between md:gap-0">
         <ScrollSection title="Education">
           {info.education.map((edu, index) => (
             <ExpandableItem
@@ -213,7 +213,7 @@ export default function CardBack({ info, onBack }: CardBackProps) {
           ))}
         </ScrollSection>
 
-        <ScrollSection title="Experience" className="flex-1">
+        <ScrollSection title="Experience">
           {info.experience.map((exp, index) => (
             <ExpandableItem
               key={exp.company + index}
@@ -249,7 +249,7 @@ export default function CardBack({ info, onBack }: CardBackProps) {
         </ScrollSection>
 
         <section>
-          <h2 className="text-white/80 text-lg mb-4 text-center">Connect</h2>
+          <h2 className="text-white/80 text-lg short:text-base mb-2 short:mb-1 text-center">Connect</h2>
           <div className="flex gap-4 justify-center">
             {info.socialLinks.map((social, index) => {
               const Icon = iconMap[social.icon as keyof typeof iconMap];
@@ -261,7 +261,7 @@ export default function CardBack({ info, onBack }: CardBackProps) {
                   rel="noopener noreferrer"
                   aria-label={social.platform}
                   className={clsx(
-                    "w-12 h-12 rounded-full",
+                    "w-12 h-12 short:w-10 short:h-10 rounded-full",
                     "bg-white/5 hover:bg-white/10 hover:scale-110",
                     "transition-[background-color,transform] duration-200",
                     "flex items-center justify-center"
@@ -313,7 +313,7 @@ export default function CardBack({ info, onBack }: CardBackProps) {
 
               <div>
                 <h3 className="text-white/80 font-medium mb-2">Key Achievements</h3>
-                <ul className="list-disc list-inside space-y-1">
+                <ul className="list-disc pl-5 space-y-1">
                   {shownExp.achievements.map((achievement, index) => (
                     <li key={index} className="text-white/80">{achievement}</li>
                   ))}

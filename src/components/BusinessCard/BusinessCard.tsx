@@ -19,7 +19,7 @@ export default function BusinessCard({ info }: BusinessCardProps) {
 
   return (
     <div className={`min-h-screen w-full flex items-center justify-center p-4 relative ${styles.metalBackground}`}>
-      <div className={`w-full max-w-2xl aspect-[3/5] md:aspect-[1.618/1] ${styles.enter}`}>
+      <div className={`w-full max-w-2xl max-w-[min(42rem,calc((100svh-2rem)*0.6))] md:max-w-[min(42rem,calc((100svh-2rem)*1.618))] aspect-[3/5] md:aspect-[1.618/1] ${styles.enter}`}>
         <div
           className={`${styles.card} ${isFlipped ? `${styles.flipped} ${styles.notClickable}` : ''}`}
           onClick={flip}

@@ -31,11 +31,11 @@ export default function CardFront({ info }: CardFrontProps) {
 
       <div className="flex-1 p-8 flex flex-col justify-center bg-[#111111]/95">
         <div className="flex flex-col">
-          <h1 className="text-[3rem] md:text-[6rem] leading-[0.85] font-bold mb-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+          <h1 className="text-[3rem] md:text-[6rem] leading-[0.85] font-bold pb-[0.12em] bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
             {name}
           </h1>
 
-          <div className="flex flex-col mt-4">
+          <div className="flex flex-col mt-2">
             <p className="text-xl md:text-2xl font-medium text-white">{info.title}</p>
             <p className="text-lg md:text-xl text-white/60">
               {info.company}, {info.location}
