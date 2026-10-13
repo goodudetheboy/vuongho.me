@@ -6,7 +6,7 @@
   "title": "Software Engineer",
   "company": "Bloomberg LP",
   "location": "New York City",
-  "profileImage": "/images/avatar.jpg",
+  "profileImage": "/images/avatar",
 
   "experience": [
     {
@@ -22,7 +22,7 @@
       ],
       "technologies": ["C++", "JavaScript", "Python", "Bloomberg BDE"],
       "iconType": "image",
-      "icon": "/images/institutions/bloomberg.png"
+      "icon": "/images/institutions/bloomberg.webp"
     },
     {
       "company": "Rochester HCI Lab",
@@ -38,7 +38,7 @@
       ],
       "technologies": ["Python", "Flask", "Docker", "AWS", "BERT", "JavaScript"],
       "iconType": "image",
-      "icon": "/images/institutions/roc-hci.png"
+      "icon": "/images/institutions/roc-hci.webp"
     },
     {
       "company": "Meta",
@@ -54,7 +54,7 @@
       ],
       "technologies": ["Python", "Flask", "Docker", "MySQL", "Nginx", "Prometheus", "Grafana"],
       "iconType": "image",
-      "icon": "/images/institutions/meta.png"
+      "icon": "/images/institutions/meta.webp"
     },
     {
       "company": "HISSC",
@@ -69,7 +69,7 @@
       ],
       "technologies": ["Elastic ML", "Linux", "Windows", "Security Analytics"],
       "iconType": "image",
-      "icon": "/images/institutions/hissc.png"
+      "icon": "/images/institutions/hissc.webp"
     },
     {
       "company": "Startup",
@@ -99,7 +99,7 @@
       ],
       "technologies": ["React", "TypeScript", "Firebase"],
       "iconType": "image",
-      "icon": "/images/institutions/vietnam-tech-society.png"
+      "icon": "/images/institutions/vietnam-tech-society.webp"
     },
     {
       "company": "Yolo Shadow",
@@ -114,7 +114,7 @@
       ],
       "technologies": ["React", "MongoDB", "Mongoose", "REST APIs"],
       "iconType": "image",
-      "icon": "/images/institutions/yolo-shadow.png"
+      "icon": "/images/institutions/yolo-shadow.webp"
     },
     {
       "company": "Google",
@@ -130,7 +130,7 @@
       ],
       "technologies": ["Java", "Gradle", "Android", "GitHub Actions"],
       "iconType": "image",
-      "icon": "/images/institutions/google.png"
+      "icon": "/images/institutions/google.webp"
     }
   ],
   "education": [
@@ -140,7 +140,7 @@
       "startDate": "Aug 2024",
       "endDate": "May 2025",
       "iconType": "image",
-      "icon": "/images/institutions/u-of-rochester.png"
+      "icon": "/images/institutions/u-of-rochester.webp"
     },
     {
       "school": "University of Rochester",
@@ -148,7 +148,7 @@
       "startDate": "Aug 2020",
       "endDate": "May 2024",
       "iconType": "image",
-      "icon": "/images/institutions/u-of-rochester.png"
+      "icon": "/images/institutions/u-of-rochester.webp"
     },
     {
       "school": "High School for the Gifted",
@@ -156,7 +156,7 @@
       "startDate": "Sep 2017",
       "endDate": "Jun 2020",
       "iconType": "image",
-      "icon": "/images/institutions/high-school-for-the-gifted.png"
+      "icon": "/images/institutions/high-school-for-the-gifted.webp"
     },
     {
       "school": "Tran Dai Nghia School",
@@ -164,7 +164,7 @@
       "startDate": "Sep 2013",
       "endDate": "Jun 2017",
       "iconType": "image",
-      "icon": "/images/institutions/tran-dai-nghia.png"
+      "icon": "/images/institutions/tran-dai-nghia.webp"
     }
   ],
   "socialLinks": [

@@ -1,10 +1,7 @@
-'use client';
-
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'preact/hooks';
 import { PersonalInfo } from '@/types/personal-info';
-import CardFront from '@/components/BusinessCard/CardFront';
-import CardBack from '@/components/BusinessCard/CardBack';
+import CardFront from './CardFront';
+import CardBack from './CardBack';
 import styles from './BusinessCard.module.css';
 
 interface BusinessCardProps {
@@ -14,7 +11,7 @@ interface BusinessCardProps {
 export default function BusinessCard({ info }: BusinessCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleCardClick = () => {
+  const flip = () => {
     if (!isFlipped) {
       setIsFlipped(true);
     }
@@ -22,28 +19,30 @@ export default function BusinessCard({ info }: BusinessCardProps) {
 
   return (
     <div className={`min-h-screen w-full flex items-center justify-center p-4 relative ${styles.metalBackground}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-2xl aspect-[3/5] md:aspect-[1.618/1]"
-      >
+      <div className={`w-full max-w-2xl aspect-[3/5] md:aspect-[1.618/1] ${styles.enter}`}>
         <div
           className={`${styles.card} ${isFlipped ? `${styles.flipped} ${styles.notClickable}` : ''}`}
-          onClick={handleCardClick}
-          role="button"
-          aria-label={isFlipped ? 'Back of card (click disabled). Use back button to flip.' : 'Front of card (click to flip to back)'}
+          onClick={flip}
+          onKeyDown={(e) => {
+            if (!isFlipped && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              flip();
+            }
+          }}
+          role={isFlipped ? undefined : 'button'}
+          tabIndex={isFlipped ? undefined : 0}
+          aria-label={isFlipped ? undefined : 'Front of card (click to flip to back)'}
         >
           <div className={styles.cardInner}>
-            <div className={`${styles.cardFace} ${styles.cardFront}`}>
+            <div className={`${styles.cardFace} ${styles.cardFront}`} aria-hidden={isFlipped}>
               <CardFront info={info} />
             </div>
-            <div className={`${styles.cardFace} ${styles.cardBack}`}>
+            <div className={`${styles.cardFace} ${styles.cardBack}`} aria-hidden={!isFlipped} inert={!isFlipped}>
               <CardBack info={info} onBack={() => setIsFlipped(false)} />
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
-} 
+}

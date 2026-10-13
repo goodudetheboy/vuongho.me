@@ -163,10 +163,10 @@ A minimalist, mobile-first **digital business card** that:
 
 ### ⚙️ Technologies
 
-* **Next.js 14**: React framework
+* **Vite + Preact**: Build tooling and UI (prerendered at build time)
 * **TailwindCSS**: Styling
-* **Framer Motion**: Animations
-* **React Icons**: Icon set
+* **CSS transitions**: Animations
+* **Inline SVG icons**: Font Awesome / Simple Icons paths
 * **TypeScript**: Type safety
 * **CSS Modules**: Component-specific styles
 
@@ -236,16 +236,17 @@ interface Contact {
 ### 📂 Project Structure
 ```
 /src
-  /app
-    globals.css
-    layout.tsx
-    page.tsx
+  App.tsx
+  main.tsx
+  entry-server.tsx
+  globals.css
   /components
     /BusinessCard
       BusinessCard.module.css
       BusinessCard.tsx
       CardBack.tsx
       CardFront.tsx
+      icons.tsx
       index.ts
   /config
     personal-info.json

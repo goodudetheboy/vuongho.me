@@ -1,11 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'preact/hooks';
+import type { ComponentChildren } from 'preact';
 import { PersonalInfo, Experience } from '@/types/personal-info';
-import { FaGithub, FaLinkedin, FaEnvelope, FaTimes, FaInfoCircle, FaTerminal, FaShieldAlt, FaRocket, FaCode, FaFlask, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { SiMeta, SiGoogle } from 'react-icons/si';
-import { IoSchool } from 'react-icons/io5';
-import { PiGraduationCap } from 'react-icons/pi';
-import Image from 'next/image';
+import { FaGithub, FaLinkedin, FaEnvelope, FaTimes, FaInfoCircle, FaTerminal, FaShieldAlt, FaRocket, FaCode, FaFlask, FaChevronLeft, FaChevronRight, SiMeta, SiGoogle, IoSchool, PiGraduationCap } from './icons';
 import clsx from 'clsx';
 
 interface CardBackProps {
@@ -37,14 +33,15 @@ interface IconProps {
 const IconComponent = ({ iconType, icon, className = "" }: IconProps) => {
   if (iconType === 'image') {
     return (
-      <div className={clsx("relative w-8 h-8", className)}>
-        <Image
-          src={icon}
-          alt="Institution icon"
-          fill
-          className="object-contain"
-        />
-      </div>
+      <img
+        src={icon}
+        alt=""
+        width={32}
+        height={32}
+        loading="lazy"
+        decoding="async"
+        className={clsx("w-8 h-8 object-contain", className)}
+      />
     );
   }
 
@@ -52,337 +49,272 @@ const IconComponent = ({ iconType, icon, className = "" }: IconProps) => {
   return <Icon className={clsx("text-2xl", className)} />;
 };
 
-export default function CardBack({ info, onBack }: CardBackProps) {
-  const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
-  const [expandedExpIndex, setExpandedExpIndex] = useState<number | null>(null);
-  const [expandedEduIndex, setExpandedEduIndex] = useState<number | null>(null);
-  const [expScrollState, setExpScrollState] = useState({ canScrollLeft: false, canScrollRight: false });
-  const [eduScrollState, setEduScrollState] = useState({ canScrollLeft: false, canScrollRight: false });
-  const expScrollRef = useRef<HTMLDivElement>(null);
-  const eduScrollRef = useRef<HTMLDivElement>(null);
+// Add a 20px threshold before showing scroll indicators
+const SCROLL_THRESHOLD = 20;
 
-  // Auto-expand first items on mount
-  useEffect(() => {
-    setExpandedExpIndex(0);
-    setExpandedEduIndex(0);
-  }, []);
+type ScrollState = { canScrollLeft: boolean; canScrollRight: boolean };
 
-  const checkScrollable = (element: HTMLDivElement | null, setScrollState: (state: { canScrollLeft: boolean, canScrollRight: boolean }) => void) => {
-    if (!element) return;
-    
-    // Add a 20px threshold before showing scroll indicators
-    const SCROLL_THRESHOLD = 20;
-    
-    const canScrollLeft = element.scrollLeft > SCROLL_THRESHOLD;
-    const canScrollRight = element.scrollLeft < (element.scrollWidth - element.clientWidth - SCROLL_THRESHOLD);
-    
-    setScrollState({ canScrollLeft, canScrollRight });
-  };
+// Horizontal strip with hidden scrollbar, wheel-to-horizontal scrolling, and
+// fading chevrons next to the section title.
+function ScrollSection({ title, className, children }: { title: string; className?: string; children: ComponentChildren }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [scroll, setScroll] = useState<ScrollState>({ canScrollLeft: false, canScrollRight: false });
 
   useEffect(() => {
-    const expElement = expScrollRef.current;
-    const eduElement = eduScrollRef.current;
+    const el = ref.current!;
+    const update = () => setScroll({
+      canScrollLeft: el.scrollLeft > SCROLL_THRESHOLD,
+      canScrollRight: el.scrollLeft < el.scrollWidth - el.clientWidth - SCROLL_THRESHOLD,
+    });
+    const onWheel = (e: WheelEvent) => {
+      if (el.scrollWidth <= el.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
 
-    if (expElement) {
-      checkScrollable(expElement, setExpScrollState);
-      const expObserver = new ResizeObserver(() => checkScrollable(expElement, setExpScrollState));
-      expObserver.observe(expElement);
-      return () => expObserver.disconnect();
-    }
-
-    if (eduElement) {
-      checkScrollable(eduElement, setEduScrollState);
-      const eduObserver = new ResizeObserver(() => checkScrollable(eduElement, setEduScrollState));
-      eduObserver.observe(eduElement);
-      return () => eduObserver.disconnect();
-    }
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    // Content width changes as items expand, which ResizeObserver on the
+    // scroll container itself doesn't see.
+    for (const child of Array.from(el.children)) observer.observe(child);
+    el.addEventListener('scroll', update, { passive: true });
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      observer.disconnect();
+      el.removeEventListener('scroll', update);
+      el.removeEventListener('wheel', onWheel);
+    };
   }, []);
 
-  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (!e.currentTarget) return;
-    e.preventDefault();
-    e.currentTarget.scrollLeft += e.deltaY;
-    checkScrollable(e.currentTarget, 
-      e.currentTarget === expScrollRef.current ? setExpScrollState : setEduScrollState
-    );
-  };
-
-  const LeftIndicator = ({ show }: { show: boolean }) => (
-    <div className="w-4">
-      <AnimatePresence>
-        {show && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }}
-            exit={{ opacity: 0 }}
-            className="text-white/60 text-sm"
-          >
-            <FaChevronLeft />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-
-  const RightIndicator = ({ show }: { show: boolean }) => (
-    <div className="w-4">
-      <AnimatePresence>
-        {show && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }}
-            exit={{ opacity: 0 }}
-            className="text-white/60 text-sm"
-          >
-            <FaChevronRight />
-          </motion.div>
-        )}
-      </AnimatePresence>
+  const indicator = (show: boolean, Icon: typeof FaChevronLeft) => (
+    <div className="w-4" aria-hidden="true">
+      <div className={clsx("text-white/60 text-sm transition-opacity duration-300", show ? "opacity-80" : "opacity-0")}>
+        <Icon />
+      </div>
     </div>
   );
 
   return (
-    <div 
-      className="w-full h-full p-8 relative bg-[#111111]/95"
+    <section className={className}>
+      <div className="flex items-center justify-between mb-4">
+        {indicator(scroll.canScrollLeft, FaChevronLeft)}
+        <h2 className="text-white/80 text-lg">{title}</h2>
+        {indicator(scroll.canScrollRight, FaChevronRight)}
+      </div>
+      <div ref={ref} className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+// A logo chip that smoothly reveals its details when expanded.
+function ExpandableItem({ iconType, icon, label, expanded, onToggle, children }: {
+  iconType: string;
+  icon: string;
+  label: string;
+  expanded: boolean;
+  onToggle: () => void;
+  children: ComponentChildren;
+}) {
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      aria-expanded={expanded}
+      aria-label={label}
+      onClick={onToggle}
+      onKeyDown={(e) => {
+        if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
+      className={clsx(
+        "h-full flex-shrink-0 rounded-xl cursor-pointer",
+        "bg-white/5 hover:bg-white/10",
+        "transition-[background-color,padding] duration-200",
+        "flex items-center px-3",
+        expanded && "pr-4"
+      )}
     >
+      <IconComponent iconType={iconType} icon={icon} className="text-white/80 flex-shrink-0" />
+      <div
+        className={clsx(
+          "grid transition-[grid-template-columns,opacity] duration-300 ease-out",
+          expanded ? "grid-cols-[1fr] opacity-100" : "grid-cols-[0fr] opacity-0"
+        )}
+      >
+        <div className="overflow-hidden whitespace-nowrap min-w-0 text-left">
+          <div className="pl-3">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function CardBack({ info, onBack }: CardBackProps) {
+  const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
+  // Keeps modal content rendered while it slides out.
+  const [shownExp, setShownExp] = useState<Experience | null>(null);
+  // First items start expanded.
+  const [expandedExpIndex, setExpandedExpIndex] = useState<number | null>(0);
+  const [expandedEduIndex, setExpandedEduIndex] = useState<number | null>(0);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  const openExp = (exp: Experience) => {
+    setShownExp(exp);
+    setSelectedExp(exp);
+  };
+
+  useEffect(() => {
+    if (!selectedExp) return;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedExp(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selectedExp]);
+
+  return (
+    <div className="w-full h-full p-8 relative bg-[#111111]/95">
       {onBack && (
-        <motion.button
+        <button
           onClick={(e) => {
             e.stopPropagation();
+            setSelectedExp(null);
             onBack();
           }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
           aria-label="Flip back to front"
-          className="absolute top-4 left-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 transition-colors"
+          className="absolute top-4 left-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 transition-[background-color,transform] hover:scale-105 active:scale-95"
         >
           <FaChevronLeft className="text-xl" />
-        </motion.button>
+        </button>
       )}
       <div className="h-full flex flex-col gap-6 md:gap-8">
-        {/* Education Section */}
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <LeftIndicator show={eduScrollState.canScrollLeft} />
-            <h2 className="text-white/80 text-lg">Education</h2>
-            <RightIndicator show={eduScrollState.canScrollRight} />
-          </div>
-          <div className="relative">
-            <div 
-              ref={eduScrollRef}
-              className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar"
-              onWheel={handleWheel}
-              onScroll={() => checkScrollable(eduScrollRef.current, setEduScrollState)}
+        <ScrollSection title="Education">
+          {info.education.map((edu, index) => (
+            <ExpandableItem
+              key={edu.school + index}
+              iconType={edu.iconType}
+              icon={edu.icon}
+              label={edu.school}
+              expanded={expandedEduIndex === index}
+              onToggle={() => setExpandedEduIndex(expandedEduIndex === index ? null : index)}
             >
-              {info.education.map((edu, index) => {
-                const isExpanded = expandedEduIndex === index;
-                
-                return (
-                  <motion.div
-                    key={edu.school + index}
-                    className="relative h-full flex-shrink-0"
-                    animate={{
-                      width: isExpanded ? 'auto' : '4rem',
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30
-                    }}
-                  >
-                    <motion.div
-                      className={clsx(
-                        "h-full rounded-xl",
-                        "bg-white/5 hover:bg-white/10",
-                        "transition-colors duration-200",
-                        "flex items-center gap-3",
-                        "px-3 relative"
-                      )}
-                      animate={{
-                        paddingRight: isExpanded ? '1rem' : '0.75rem',
-                      }}
-                    >
-                      <div 
-                        className="flex items-center gap-3 cursor-pointer"
-                        onClick={() => setExpandedEduIndex(isExpanded ? null : index)}
-                      >
-                        <IconComponent 
-                          iconType={edu.iconType}
-                          icon={edu.icon}
-                          className="text-white/80 flex-shrink-0"
-                        />
-                        <motion.div
-                          animate={{
-                            opacity: isExpanded ? 1 : 0,
-                            width: isExpanded ? 'auto' : 0,
-                          }}
-                          className="overflow-hidden whitespace-nowrap"
-                        >
-                          <p className="font-medium text-white">{edu.school}</p>
-                          <p className="text-sm text-white/60">{edu.degree}</p>
-                          <p className="text-xs text-white/40">
-                            {edu.startDate} - {edu.endDate}
-                          </p>
-                        </motion.div>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+              <p className="font-medium text-white">{edu.school}</p>
+              <p className="text-sm text-white/60">{edu.degree}</p>
+              <p className="text-xs text-white/40">
+                {edu.startDate} - {edu.endDate}
+              </p>
+            </ExpandableItem>
+          ))}
+        </ScrollSection>
 
-        {/* Experience Section */}
-        <section className="flex-1">
-          <div className="flex items-center justify-between mb-4">
-            <LeftIndicator show={expScrollState.canScrollLeft} />
-            <h2 className="text-white/80 text-lg">Experience</h2>
-            <RightIndicator show={expScrollState.canScrollRight} />
-          </div>
-          <div className="relative">
-            <div 
-              ref={expScrollRef}
-              className="flex items-center gap-4 h-16 overflow-x-auto no-scrollbar"
-              onWheel={handleWheel}
-              onScroll={() => checkScrollable(expScrollRef.current, setExpScrollState)}
+        <ScrollSection title="Experience" className="flex-1">
+          {info.experience.map((exp, index) => (
+            <ExpandableItem
+              key={exp.company + index}
+              iconType={exp.iconType}
+              icon={exp.icon}
+              label={exp.company}
+              expanded={expandedExpIndex === index}
+              onToggle={() => {
+                setExpandedExpIndex(expandedExpIndex === index ? null : index);
+                setSelectedExp(null);
+              }}
             >
-              {info.experience.map((exp, index) => {
-                const isExpanded = expandedExpIndex === index;
+              <div className="flex items-center gap-2">
+                <p className="font-medium text-white">{exp.company}</p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openExp(exp);
+                  }}
+                  tabIndex={expandedExpIndex === index ? 0 : -1}
+                  aria-label={`More about ${exp.company}`}
+                  className="text-white/40 hover:text-white/60 transition-colors"
+                >
+                  <FaInfoCircle />
+                </button>
+              </div>
+              <p className="text-sm text-white/60">{exp.role}</p>
+              <p className="text-xs text-white/40">
+                {exp.startDate} - {exp.endDate}
+              </p>
+            </ExpandableItem>
+          ))}
+        </ScrollSection>
 
-                return (
-                  <motion.div
-                    key={exp.company + index}
-                    className="relative h-full flex-shrink-0"
-                    animate={{
-                      width: isExpanded ? 'auto' : '4rem',
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30
-                    }}
-                  >
-                    <motion.div
-                      className={clsx(
-                        "h-full rounded-xl",
-                        "bg-white/5 hover:bg-white/10",
-                        "transition-colors duration-200",
-                        "flex items-center gap-3",
-                        "px-3 relative"
-                      )}
-                      animate={{
-                        paddingRight: isExpanded ? '1rem' : '0.75rem',
-                      }}
-                    >
-                      <div 
-                        className="flex items-center gap-3 cursor-pointer"
-                        onClick={() => {
-                          setExpandedExpIndex(isExpanded ? null : index);
-                          setSelectedExp(null);
-                        }}
-                      >
-                        <IconComponent 
-                          iconType={exp.iconType}
-                          icon={exp.icon}
-                          className="text-white/80 flex-shrink-0"
-                        />
-                        <motion.div
-                          animate={{
-                            opacity: isExpanded ? 1 : 0,
-                            width: isExpanded ? 'auto' : 0,
-                          }}
-                          className="overflow-hidden whitespace-nowrap"
-                        >
-                          <div className="flex items-center gap-2">
-                            <p className="font-medium text-white">{exp.company}</p>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedExp(exp);
-                              }}
-                              className="text-white/40 hover:text-white/60 transition-colors"
-                            >
-                              <FaInfoCircle />
-                            </button>
-                          </div>
-                          <p className="text-sm text-white/60">{exp.role}</p>
-                          <p className="text-xs text-white/40">
-                            {exp.startDate} - {exp.endDate}
-                          </p>
-                        </motion.div>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Connect Section */}
         <section>
           <h2 className="text-white/80 text-lg mb-4 text-center">Connect</h2>
           <div className="flex gap-4 justify-center">
             {info.socialLinks.map((social, index) => {
               const Icon = iconMap[social.icon as keyof typeof iconMap];
               return (
-                <motion.a
+                <a
                   key={social.platform + index}
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2 }}
+                  aria-label={social.platform}
                   className={clsx(
                     "w-12 h-12 rounded-full",
-                    "bg-white/5 hover:bg-white/10",
-                    "transition-colors duration-200",
+                    "bg-white/5 hover:bg-white/10 hover:scale-110",
+                    "transition-[background-color,transform] duration-200",
                     "flex items-center justify-center"
                   )}
                 >
                   <Icon className="text-2xl text-white/80" />
-                </motion.a>
+                </a>
               );
             })}
           </div>
         </section>
       </div>
 
-      <AnimatePresence>
-        {selectedExp && (
-          <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="absolute inset-0 bg-black/95 backdrop-blur-sm p-8 overflow-y-auto"
-          >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={shownExp ? `${shownExp.company} details` : undefined}
+        inert={!selectedExp}
+        onTransitionEnd={() => !selectedExp && setShownExp(null)}
+        className={clsx(
+          "absolute inset-0 z-30 bg-black/95 backdrop-blur-sm p-8 overflow-y-auto text-left",
+          "transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          selectedExp ? "translate-y-0" : "translate-y-full"
+        )}
+      >
+        {shownExp && (
+          <>
             <div className="flex justify-between items-start mb-6">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-1">{selectedExp.company}</h2>
-                <p className="text-white/60">{selectedExp.role}</p>
-                <p className="text-sm text-white/40">{selectedExp.startDate} - {selectedExp.endDate}</p>
+                <h2 className="text-2xl font-bold text-white mb-1">{shownExp.company}</h2>
+                <p className="text-white/60">{shownExp.role}</p>
+                <p className="text-sm text-white/40">{shownExp.startDate} - {shownExp.endDate}</p>
               </div>
-              <motion.button
+              <button
+                ref={closeRef}
                 onClick={() => setSelectedExp(null)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                aria-label="Close"
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-[background-color,transform] hover:scale-110 active:scale-95"
               >
                 <FaTimes className="text-white/80" />
-              </motion.button>
+              </button>
             </div>
 
             <div className="space-y-6">
               <div>
                 <h3 className="text-white/80 font-medium mb-2">Overview</h3>
-                <p className="text-white/60">{selectedExp.description}</p>
+                <p className="text-white/60">{shownExp.description}</p>
               </div>
 
               <div>
                 <h3 className="text-white/80 font-medium mb-2">Key Achievements</h3>
                 <ul className="list-disc list-inside space-y-1">
-                  {selectedExp.achievements.map((achievement: string, index: number) => (
+                  {shownExp.achievements.map((achievement, index) => (
                     <li key={index} className="text-white/80">{achievement}</li>
                   ))}
                 </ul>
@@ -391,20 +323,17 @@ export default function CardBack({ info, onBack }: CardBackProps) {
               <div>
                 <h3 className="text-white/80 font-medium mb-2">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedExp.technologies.map((tech: string, index: number) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-white/10 rounded text-sm"
-                    >
+                  {shownExp.technologies.map((tech, index) => (
+                    <span key={index} className="px-2 py-1 bg-white/10 rounded text-sm">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
             </div>
-          </motion.div>
+          </>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
-} 
+}
