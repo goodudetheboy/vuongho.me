@@ -21,7 +21,11 @@ npm run preview   # serve dist/ locally
 
 ## Deploying
 
-The site deploys to the `vuonghome` Firebase project (see `.firebaserc`):
+Pushing to `main` deploys automatically via GitHub Actions (`.github/workflows/deploy.yml`). Pull requests get a
+type-check and build. The workflow authenticates to the `vuonghome` Firebase project with Workload Identity Federation
+(service account `github-deployer@vuonghome.iam.gserviceaccount.com`), so no keys are stored in GitHub.
+
+To deploy manually from your machine:
 
 ```bash
 npx firebase login   # once
